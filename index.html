@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workspace Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 h-screen flex overflow-hidden font-sans">
+    
+    <!-- Бокова панель -->
+    <aside class="w-72 bg-gray-800 border-r border-gray-700 flex flex-col">
+        <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+            <h1 class="text-xl font-bold">AI Workspace</h1>
+        </div>
+        <div class="p-4">
+            <button id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+                Увійти через Google
+            </button>
+            <div id="userInfo" class="hidden text-sm text-gray-300 mb-2"></div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 space-y-2" id="chatHistoryList">
+            <!-- Тут буде історія чатів з бази даних -->
+            <p class="text-xs text-gray-500 text-center">Історія порожня</p>
+        </div>
+    </aside>
+
+    <!-- Основне вікно чату -->
+    <main class="flex-1 flex flex-col relative">
+        <!-- Верхня панель (Вибір моделі) -->
+        <header class="h-16 bg-gray-800 border-b border-gray-700 flex items-center px-6 justify-between">
+            <select id="modelSelect" class="bg-gray-700 text-white rounded-lg px-4 py-2 outline-none border border-gray-600 focus:border-blue-500">
+                <option value="meta/llama3-70b-instruct">Llama 3 70B (Швидка/Загальна)</option>
+                <option value="deepseek-ai/deepseek-coder-33b-instruct">DeepSeek Coder (Програмування)</option>
+                <option value="nvidia/neva-22b">NeVA 22B (Робота з фото)</option>
+            </select>
+        </header>
+
+        <!-- Вікно повідомлень -->
+        <div id="chatBox" class="flex-1 overflow-y-auto p-6 space-y-6 pb-32">
+            <div class="flex gap-4">
+                <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center shrink-0">AI</div>
+                <div class="bg-gray-800 p-4 rounded-xl rounded-tl-none max-w-3xl">
+                    Привіт! Я твій AI-помічник. Обери модель зверху та напиши свій запит.
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель вводу -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gray-900 bg-opacity-95 p-4 border-t border-gray-700">
+            <div class="max-w-4xl mx-auto relative">
+                <textarea id="msgInput" rows="1" class="w-full bg-gray-800 text-white rounded-xl pl-4 pr-24 py-3 outline-none border border-gray-600 focus:border-blue-500 resize-none overflow-hidden" placeholder="Напишіть повідомлення..."></textarea>
+                <div class="absolute right-2 bottom-2 flex gap-2">
+                    <button id="attachBtn" class="p-2 text-gray-400 hover:text-white rounded-lg" title="Прикріпити фото">
+                        📎
+                    </button>
+                    <button id="sendBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg transition font-medium">
+                        Відправити
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
